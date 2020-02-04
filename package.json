@@ -1,0 +1,32 @@
+{
+  "name": "keg-tracker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ingalls/keg-tracker",
+  "author": "ingalls <nick@ingalls.ca>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "tape test/*.test.js",
+    "lint": "documentation lint lib/ && eslint index.js lib test web",
+    "prod": "./index.js --prod",
+    "dev": "./index.js --db kegtracker"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-pg-simple": "^6.1.0",
+    "express": "^4.17.1",
+    "express-minify": "^1.0.0",
+    "express-session": "^1.17.0",
+    "minimist": "^1.2.0",
+    "moment": "^2.24.0",
+    "pg": "^7.18.1"
+  },
+  "devDependencies": {
+    "@mapbox/eslint-config-geocoding": "^2.0.2",
+    "documentation": "^12.1.4",
+    "eslint": "^6.8.0",
+    "eslint-plugin-node": "^11.0.0",
+    "tape": "^4.13.0"
+  }
+}
