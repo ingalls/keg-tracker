@@ -17,7 +17,7 @@ CREATE TABLE location (
     name        TEXT UNIQUE NOT NULL,
     addr        TEXT,
     city        TEXT,
-    state       TEXT,
+    region      TEXT,
     postcode    TEXT,
     agents      JSONB
 );
