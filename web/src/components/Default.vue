@@ -13,17 +13,10 @@ export default {
         }
     },
     created: function() {
-        this.get();
+
     },
     methods: {
-        get: function() {
-            fetch('/api/companies', {
-                method: 'GET',
-                credentials: 'same-origin'
-            }).then((res) => {
 
-            });
-        }
     }
 }
 </script>

@@ -10,9 +10,9 @@ CREATE TABLE session (
 DROP TABLE IF EXISTS keg_audit;
 DROP TABLE IF EXISTS keg;
 DROP TABLE IF EXISTS product;
-DROP TABLE IF EXISTS company;
+DROP TABLE IF EXISTS location;
 
-CREATE TABLE company (
+CREATE TABLE location (
     id          UUID PRIMARY KEY,
     name        TEXT UNIQUE NOT NULL,
     addr        TEXT,
@@ -33,9 +33,9 @@ CREATE TABLE keg (
 
     -- Current Status - Changes Audited --
     name        TEXT UNIQUE NOT NULL,
-    location    UUID ,--REFERENCES company(id),
+    location    UUID REFERENCES location(id),
     status      TEXT NOT NULL,
-    product     UUID ,--REFERENCES product(id),
+    product     UUID REFERENCES product(id),
 
     -- Current Status - Changes Not Audited --
     created     TIMESTAMP,
@@ -46,7 +46,7 @@ CREATE TABLE keg_audit (
     id          UUID PRIMARY KEY,
     keg         UUID REFERENCES keg(id),
     name        TEXT UNIQUE NOT NULL,
-    location    UUID REFERENCES company(id),
+    location    UUID REFERENCES location(id),
     status      TEXT NOT NULL,
     product     UUID REFERENCES product(id)
 );

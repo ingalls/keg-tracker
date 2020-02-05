@@ -4,11 +4,15 @@
         <div class='flex-child w-full w60-ml absolute static-ml left bottom'>
             <div class='flex-parent flex-parent--column viewport-third h-full hmax-full bg-white'>
                 <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
-                    <button @click='mode = "company"' class='btn round btn--stroke my6 w36 h36 color-black'>
-                        <svg class='icon'><use xlink:href='#icon-house'/></svg>
+                    <button @click='mode = "default"' class='btn px6 round btn--stroke mb24 w36 h36 color-black'>
+                        <svg class='icon h24 w24'><use xlink:href='#icon-home'/></svg>
                     </button>
-                    <button @click='mode = "keg"' class='btn round btn--stroke my6 w36 h36 color-black'>
-                        <svg class='icon'><use xlink:href='#icon-house'/></svg>
+
+                    <button @click='mode = "company"' class='btn px6 round btn--stroke my6 w36 h36 color-black'>
+                        <svg class='icon h24 w24'><use xlink:href='#icon-database'/></svg>
+                    </button>
+                    <button @click='mode = "keg"' class='btn px6 round btn--stroke my6 w36 h36 color-black'>
+                        <svg class='icon h24 w24'><use xlink:href='#icon-extrusion'/></svg>
                     </button>
                 </div>
                 <footer class='px12 py12 bg-gray-faint txt-s'>
@@ -17,10 +21,10 @@
         </div>
         <div class='flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-ml'>
             <template v-if='mode === "default"'>
-
+                <Default/>
             </template>
             <template v-else-if='mode === "company"'>
-                <CompanyList/>
+                <LocationList/>
             </template>
             <template v-else-if='mode === "keg"'>
 
@@ -31,8 +35,8 @@
 </template>
 
 <script>
-import '../node_modules/@mapbox/assembly/dist/assembly.js';
-import CompanyList from './components/CompanyList.vue';
+import LocationList from './components/LocationList.vue';
+import Default from './components/Default.vue';
 
 export default {
     name: 'app',
@@ -42,11 +46,8 @@ export default {
         }
     },
     components: {
-        CompanyList
+        LocationList,
+        Default
     }
 }
 </script>
-
-<style>
-    @import '../node_modules/@mapbox/assembly/dist/assembly.min.css';
-</style>

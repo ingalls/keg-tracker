@@ -20,7 +20,8 @@
     "express-session": "^1.17.0",
     "minimist": "^1.2.0",
     "moment": "^2.24.0",
-    "pg": "^7.18.1"
+    "pg": "^7.18.1",
+    "uuid": "^3.4.0"
   },
   "devDependencies": {
     "@mapbox/eslint-config-geocoding": "^2.0.2",
