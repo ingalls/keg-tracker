@@ -20,18 +20,7 @@
             <div class='flex-parent flex-parent--center-main pb24'>
                 <div class='flex-child w600'>
 
-                    <template v-if='folds.contact'>
-                        <div class='col col--12'>
-                            <button @click='folds.contact = false'class='btn round btn--stroke color-gray'><svg class='icon h12 w12'><use xlink:href='#icon-chevron-right'/></svg></button>
-                            Location Details
-                       </div>
-                    </template>
-                    <template v-else>
-                        <div class='col col--12'>
-                            <button @click='folds.contact = true'class='btn round btn--stroke color-gray'><svg class='icon h12 w12'><use xlink:href='#icon-chevron-down'/></svg></button>
-                            Location Details
-                        </div>
-
+                    <template v-if='mode === "info"'>
                         <div class='grid grid--gut12 col col--12'>
                              <div class='col col--12 pt24'>
                                 <label>Address:</label>
@@ -51,17 +40,35 @@
                              </div>
                         </div>
                     </template>
-                    <template v-if='folds.kegs'>
-                        <div class='col col--12'>
-                            <button @click='folds.contact = false'class='btn round btn--stroke color-gray'><svg class='icon h12 w12'><use xlink:href='#icon-chevron-right'/></svg></button>
-                            Kegs
-                       </div>
-                    </template>
-                    <template v-else>
-                        <div class='col col--12'>
-                            <button @click='folds.contact = true'class='btn round btn--stroke color-gray'><svg class='icon h12 w12'><use xlink:href='#icon-chevron-down'/></svg></button>
-                            Kegs
+                    <template v-else-if='mode ==="kegs"'>
+                        <div class='grid'>
+                            <div class='col col--12 py12'>
+								<h2 class='txt-h4'>Kegs</h2>
+                            </div>
+
+                            <div class='col col--6 border-b border--gray-light'>
+                                <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-database'/></svg>
+                                Name
+                            </div>
+                            <div class='col col--3 border-b border--gray-light'>
+                                <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-clock'/></svg>
+                                Stay
+                            </div>
+                            <div class='col col--3 border-b border--gray-light'>
+                                <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-filter'/></svg>
+                                Size
+                            </div>
                         </div>
+
+                        <template v-for='k in kegs'>
+                            <div class='grid grid--gut12 col col--12 py6 bg-darken10-on-hover cursor-pointer'>
+                                <div @click='keg = k.id' class='col col--6 pl6'>
+                                    <span v-text='k.name'></span>
+                                </div>
+                                <div @click='keg = k.id'class='col col--3' v-text='k.stay + " days"'></div>
+                                <div @click='keg = k.id'class='col col--3' v-text='k.capacity'></div>
+                            </div>
+                        </template>
                     </template>
                 </div>
             </div>
@@ -75,10 +82,7 @@ export default {
     data: function() {
         return {
             loading: true,
-            folds: {
-                contact: true,
-                kegs: false
-            },
+            mode: 'kegs',
             kegs: [],
             location: {
                 name: '',
