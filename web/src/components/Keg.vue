@@ -8,12 +8,12 @@
         <template v-else>
             <div class='flex-parent flex-parent--center-main pt60 pb24'>
                 <div class='flex-child'>
-                    <svg class='icon h60 w60'><use xlink:href='#icon-marker'/></svg>
+                    <svg class='icon h60 w60'><use xlink:href='#icon-database'/></svg>
                 </div>
             </div>
             <div class='flex-parent flex-parent--center-main pb24'>
                 <div class='flex-child'>
-                    <span v-text='location.name'></span>
+                    <span v-text='keg.name'></span>
                 </div>
             </div>
 
@@ -22,20 +22,8 @@
 
                     <div class='grid grid--gut12 col col--12'>
                          <div class='col col--12 pt24'>
-                            <label>Address:</label>
-                            <div class='h24' v-text='location.addr'></div>
-                         </div>
-                         <div class='col col--4'>
-                            <label>City:</label>
-                            <div class='h24' v-text='location.city'></div>
-                         </div>
-                         <div class='col col--4'>
-                            <label>Region:</label>
-                            <div class='h24' v-text='location.region'></div>
-                         </div>
-                         <div class='col col--4'>
-                            <label>Postcode:</label>
-                            <div class='h24' v-text='location.postcode'></div>
+                            <label>Location:</label>
+                            <div class='h24' v-text='keg.location'></div>
                          </div>
                     </div>
 
@@ -51,13 +39,13 @@ export default {
     data: function() {
         return {
             loading: true,
-            location: {
+            keg: {
                 name: '',
-                addr: '',
-                city: '',
-                region: '',
-                postcode: '',
-                agents: []
+                location: '',
+                status: '',
+                product: '',
+                created: '',
+                capacity: ''
             }
         }
     },
@@ -66,19 +54,19 @@ export default {
     },
     methods: {
         get: function() {
-            fetch(window.location.origin + '/api/locations/' + this.id, {
+            fetch(window.location.origin + '/api/kegs/' + this.id, {
                 method: 'GET',
                 credentials: 'same-origin'
             }).then((res) => {
                 this.loading = false;
 
                 return res.json();
-            }).then((location) => {
-                this.location = location;
+            }).then((keg) => {
+                this.keg = leg;
             });
         },
         kegs: function() {
-            
+
         },
         close: function() {
             this.$emit('close');

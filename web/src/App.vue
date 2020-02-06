@@ -9,10 +9,10 @@
                     </button>
 
                     <button @click='mode = "company"' class='btn px6 round btn--stroke my6 w36 h36 color-black'>
-                        <svg class='icon h24 w24'><use xlink:href='#icon-database'/></svg>
+                        <svg class='icon h24 w24'><use xlink:href='#icon-marker'/></svg>
                     </button>
                     <button @click='mode = "keg"' class='btn px6 round btn--stroke my6 w36 h36 color-black'>
-                        <svg class='icon h24 w24'><use xlink:href='#icon-extrusion'/></svg>
+                        <svg class='icon h24 w24'><use xlink:href='#icon-database'/></svg>
                     </button>
                 </div>
                 <footer class='px12 py12 bg-gray-faint txt-s'>
@@ -27,7 +27,7 @@
                 <LocationList/>
             </template>
             <template v-else-if='mode === "keg"'>
-
+                <KegList/>
             </template>
         </div>
     </div>
@@ -36,6 +36,7 @@
 
 <script>
 import LocationList from './components/LocationList.vue';
+import KegList from './components/KegList.vue';
 import Default from './components/Default.vue';
 
 export default {
@@ -47,6 +48,7 @@ export default {
     },
     components: {
         LocationList,
+        KegList,
         Default
     }
 }

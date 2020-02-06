@@ -22,10 +22,28 @@ CREATE TABLE location (
     agents      JSONB
 );
 
+INSERT INTO location (
+    id,
+    name
+) VALUES (
+    '00000000-0000-0000-0000-000000000000',
+    'Brewery'
+);
+
 CREATE TABLE product (
     id          UUID PRIMARY KEY,
     status      TEXT NOT NULL,
     name        TEXT UNIQUE NOT NULL
+);
+
+INSERT INTO product (
+    id,
+    status,
+    name
+) VALUES (
+    '00000000-0000-0000-0000-000000000000',
+    'none',
+    'Empty'
 );
 
 CREATE TABLE keg (
@@ -39,7 +57,7 @@ CREATE TABLE keg (
 
     -- Current Status - Changes Not Audited --
     created     TIMESTAMP,
-    capacity    BIGINT
+    capacity    TEXT
 );
 
 CREATE TABLE keg_audit (

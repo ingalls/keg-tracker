@@ -33,14 +33,16 @@
                 <div class='flex-child w600'>
                     <h1 align=center class='txt-h3 py30'>Locations</h1>
 
-                    <div class='grid grid--gut12 col col--12'>
-                        <div class='col col--8 border-b border--gray-light'>
-                            <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-marker'/></svg>
-                            Location
-                        </div>
-                        <div class='col col--4 border-b border--gray-light'>
-                            <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-database'/></svg>
-                            Keg Inventory
+                    <div class='col col--12'>
+                        <div class='grid'>
+                            <div class='col col--8 border-b border--gray-light'>
+                                <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-marker'/></svg>
+                                Location
+                            </div>
+                            <div class='col col--4 border-b border--gray-light'>
+                                <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-clipboard'/></svg>
+                                Keg Inventory
+                            </div>
                         </div>
 
                         <template v-for='loc in locations'>
