@@ -20,25 +20,49 @@
             <div class='flex-parent flex-parent--center-main pb24'>
                 <div class='flex-child w600'>
 
-                    <div class='grid grid--gut12 col col--12'>
-                         <div class='col col--12 pt24'>
-                            <label>Address:</label>
-                            <div class='h24' v-text='location.addr'></div>
-                         </div>
-                         <div class='col col--4'>
-                            <label>City:</label>
-                            <div class='h24' v-text='location.city'></div>
-                         </div>
-                         <div class='col col--4'>
-                            <label>Region:</label>
-                            <div class='h24' v-text='location.region'></div>
-                         </div>
-                         <div class='col col--4'>
-                            <label>Postcode:</label>
-                            <div class='h24' v-text='location.postcode'></div>
-                         </div>
-                    </div>
+                    <template v-if='folds.contact'>
+                        <div class='col col--12'>
+                            <button @click='folds.contact = false'class='btn round btn--stroke color-gray'><svg class='icon h12 w12'><use xlink:href='#icon-chevron-right'/></svg></button>
+                            Location Details
+                       </div>
+                    </template>
+                    <template v-else>
+                        <div class='col col--12'>
+                            <button @click='folds.contact = true'class='btn round btn--stroke color-gray'><svg class='icon h12 w12'><use xlink:href='#icon-chevron-down'/></svg></button>
+                            Location Details
+                        </div>
 
+                        <div class='grid grid--gut12 col col--12'>
+                             <div class='col col--12 pt24'>
+                                <label>Address:</label>
+                                <div class='h24' v-text='location.addr'></div>
+                             </div>
+                             <div class='col col--4'>
+                                <label>City:</label>
+                                <div class='h24' v-text='location.city'></div>
+                             </div>
+                             <div class='col col--4'>
+                                <label>Region:</label>
+                                <div class='h24' v-text='location.region'></div>
+                             </div>
+                             <div class='col col--4'>
+                                <label>Postcode:</label>
+                                <div class='h24' v-text='location.postcode'></div>
+                             </div>
+                        </div>
+                    </template>
+                    <template v-if='folds.kegs'>
+                        <div class='col col--12'>
+                            <button @click='folds.contact = false'class='btn round btn--stroke color-gray'><svg class='icon h12 w12'><use xlink:href='#icon-chevron-right'/></svg></button>
+                            Kegs
+                       </div>
+                    </template>
+                    <template v-else>
+                        <div class='col col--12'>
+                            <button @click='folds.contact = true'class='btn round btn--stroke color-gray'><svg class='icon h12 w12'><use xlink:href='#icon-chevron-down'/></svg></button>
+                            Kegs
+                        </div>
+                    </template>
                 </div>
             </div>
         </template>
@@ -51,6 +75,11 @@ export default {
     data: function() {
         return {
             loading: true,
+            folds: {
+                contact: true,
+                kegs: false
+            },
+            kegs: [],
             location: {
                 name: '',
                 addr: '',
@@ -62,6 +91,7 @@ export default {
         }
     },
     created: function() {
+        this.get_kegs();
         this.get();
     },
     methods: {
@@ -77,8 +107,15 @@ export default {
                 this.location = location;
             });
         },
-        kegs: function() {
-            
+        get_kegs: function() {
+            fetch(window.location.origin + `/api/kegs?location=${encodeURIComponent(this.id)}`, {
+                method: 'GET',
+                credentials: 'same-origin'
+            }).then((res) => {
+                return res.json();
+            }).then((kegs) => {
+                this.kegs = kegs;
+            });
         },
         close: function() {
             this.$emit('close');

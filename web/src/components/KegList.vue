@@ -31,29 +31,54 @@
         <template v-else>
             <div class='flex-parent flex-parent--center-main'>
                 <div class='flex-child w600'>
-                    <h1 align=center class='txt-h3 py30'>Kegs</h1>
+                    <h1 align='center' class='txt-h3 pt30'>Kegs</h1>
+
+                    <div class='flex-parent flex-parent--center-main py24'>
+                        <div class='flex-child'>
+                            <label class='switch-container'>
+                                <input v-model='noncirculating' type='checkbox' />
+                                <div class='switch mr6'></div>
+                                Non-Circulating
+                            </label>
+                        </div>
+                    </div>
 
                     <div class='col col--12'>
                         <div class='grid'>
-                            <div class='col col--6 border-b border--gray-light'>
+                            <div @click='order = "name"' class='cursor-pointer txt-underline-on-hover col col--4 border-b border--gray-light'>
                                 <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-database'/></svg>
-                                Name
+                                Name 
+                                <template v-if='order === "name"'><svg class='icon fr mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-chevron-down'/></svg></template>
                             </div>
-                            <div class='col col--2 border-b border--gray-light'>
+                            <div @click='order = "stay"' class='cursor-pointer txt-underline-on-hover col col--2 border-b border--gray-light'>
+                                <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-clock'/></svg>
+                                Stay
+                                <template v-if='order === "stay"'><svg class='icon fr mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-chevron-down'/></svg></template>
+                            </div>
+                            <div @click='order = "capacity"' class='cursor-pointer txt-underline-on-hover jcol col--2 border-b border--gray-light'>
                                 <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-filter'/></svg>
-                                Capacity
+                                Size
+                                <template v-if='order === "capacity"'><svg class='icon fr mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-chevron-down'/></svg></template>
                             </div>
-                            <div class='col col--4 border-b border--gray-light'>
+                            <div @click='order = "location"' class='cursor-pointer txt-underline-on-hover col col--4 border-b border--gray-light'>
                                 <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-marker'/></svg>
                                 Location
+                                <template v-if='order === "location"'><svg class='icon fr mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-chevron-down'/></svg></template>
                             </div>
                         </div>
 
                         <template v-for='k in kegs'>
-                            <div @click='keg = k.id' class='grid grid--gut12 col col--12 py6 bg-darken10-on-hover cursor-pointer'>
-                                <div class='col col--6 pl6' v-text='k.name'></div>
-                                <div class='col col--2' v-text='k.capacity'></div>
-                                <div class='col col--4' v-text='k.location'></div>
+                            <div class='grid grid--gut12 col col--12 py6 bg-darken10-on-hover cursor-pointer'>
+                                <div @click='keg = k.id' class='col col--4 pl6'>
+                                    <span v-text='k.name'></span>
+
+                                    <template v-if='k.status !== "Circulating"'>
+                                        <span class='ml6 color-red border border--red px6 py3 txt-xs txt-bold round' v-text='k.status'></span>
+                                    </template>
+                                </div>
+                                <div @click='keg = k.id'class='col col--2' v-text='k.stay + " days"'></div>
+                                <div @click='keg = k.id'class='col col--2' v-text='k.capacity'></div>
+                                <div @click='location(k.location)' class='col col--4 txt-underline-on-hover' v-text='k.location_name'></div>
                             </div>
                         </template>
 
@@ -78,12 +103,22 @@ export default {
     data: function() {
         return {
             loading: true,
+            noncirculating: false,
+            order: 'stay',
             keg: false,
             kegs: []
         }
     },
     created: function() {
         this.refresh();
+    },
+    watch: {
+        noncirculating: function() {
+            this.refresh();
+        },
+        order: function() {
+            this.refresh();
+        }
     },
     components: {
         Keg,
@@ -99,8 +134,9 @@ export default {
         },
         get: function() {
             this.loading = true;
+            const status = this.noncirculating ? 'all' : 'Circulating';
 
-            fetch(window.location.origin + '/api/kegs', {
+            fetch(window.location.origin + `/api/kegs?status=${status}&order=${this.order}`, {
                 method: 'GET',
                 credentials: 'same-origin'
             }).then((res) => {
@@ -112,6 +148,9 @@ export default {
             }).catch((err) => {
                 alert(err.message);
             });
+        },
+        location: function(id) {
+            this.$emit('location', id);
         }
     }
 }

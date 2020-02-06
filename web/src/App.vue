@@ -8,7 +8,7 @@
                         <svg class='icon h24 w24'><use xlink:href='#icon-home'/></svg>
                     </button>
 
-                    <button @click='mode = "company"' class='btn px6 round btn--stroke my6 w36 h36 color-black'>
+                    <button @click='mode = "location"' class='btn px6 round btn--stroke my6 w36 h36 color-black'>
                         <svg class='icon h24 w24'><use xlink:href='#icon-marker'/></svg>
                     </button>
                     <button @click='mode = "keg"' class='btn px6 round btn--stroke my6 w36 h36 color-black'>
@@ -23,11 +23,11 @@
             <template v-if='mode === "default"'>
                 <Default/>
             </template>
-            <template v-else-if='mode === "company"'>
-                <LocationList/>
+            <template v-else-if='mode === "location"'>
+                <LocationList :location='location'/>
             </template>
             <template v-else-if='mode === "keg"'>
-                <KegList/>
+                <KegList v-on:location='location = $event'/>
             </template>
         </div>
     </div>
@@ -43,7 +43,13 @@ export default {
     name: 'app',
     data: function() {
         return {
+            location: false,
             mode: 'default'
+        }
+    },
+    watch: {
+        location: function() {
+            this.mode = 'location';
         }
     },
     components: {

@@ -31,19 +31,19 @@
 
                      <div class='col col--12 pt24'>
                         <label>Address:</label>
-                        <input class='input' placeholder='27 Allegheny Drive' />
+                        <input v-model='location.addr' class='input' placeholder='27 Allegheny Drive' />
                      </div>
                      <div class='col col--4'>
                         <label>City:</label>
-                        <input class='input' placeholder='Seneca Rocks' />
+                        <input v-model='location.city' class='input' placeholder='Seneca Rocks' />
                      </div>
                      <div class='col col--4'>
                         <label>Region:</label>
-                        <input class='input' placeholder='WV' />
+                        <input v-model='location.region' class='input' placeholder='WV' />
                      </div>
                      <div class='col col--4'>
                         <label>Postcode:</label>
-                        <input class='input' placeholder='26884' />
+                        <input v-model='location.postcode' class='input' placeholder='26884' />
                      </div>
 
                      <div class='col col--12 pt24'>
@@ -63,7 +63,11 @@ export default {
     data: function() {
         return {
             location: {
-                name: ''
+                name: '',
+                addr: '',
+                city: '',
+                region: '',
+                postcode: ''
             }
         }
     },

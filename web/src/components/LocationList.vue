@@ -69,20 +69,26 @@ import Location from './Location.vue'
 import LocationEdit from './LocationEdit.vue'
 
 export default {
-    props: [],
+    props: ['location'],
     data: function() {
         return {
             loading: true,
-            location: false,
             locations: []
         }
     },
-    created: function() {
-        this.refresh();
+    mounted: function() {
+        if (this.location) {
+            this.loading = false;
+        } else {
+            this.refresh();
+        }
     },
     components: {
         Location,
         LocationEdit
+    },
+    watch: {
+
     },
     methods: {
         refresh: function() {
