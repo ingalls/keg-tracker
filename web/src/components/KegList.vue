@@ -51,8 +51,8 @@
 
                         <template v-for='k in kegs'>
                             <div @click='keg = k.id' class='grid grid--gut12 col col--12 py6 bg-darken10-on-hover cursor-pointer'>
-                                <div class='col col--6' v-text='k.name'></div>
-                                <div class='col col--2' v-text='k.capacity + "L"'></div>
+                                <div class='col col--6 pl6' v-text='k.name'></div>
+                                <div class='col col--2' v-text='k.capacity'></div>
                                 <div class='col col--4' v-text='k.location'></div>
                             </div>
                         </template>

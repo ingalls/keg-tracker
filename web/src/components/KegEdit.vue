@@ -24,19 +24,37 @@
             <div class='flex-child w600'>
 
                 <div class='grid grid--gut12 col col--12'>
-                    <div class='col col--12'>
+                    <div class='col col--8'>
                         <label>Name:</label>
                         <input v-model='keg.name' class='input' placeholder='Roaring Rabbit' />
                     </div>
 
                     <div class='col col--4'>
+                        <label>Manufacturer:</label>
+                        <input v-model='keg.manufacturer' class='input' placeholder='ACME Labs' />
+                    </div>
+
+                    <div class='col col--4'>
                         <label>Capacity:</label>
-                        <input v-model='keg.capacity' class='input' placeholder='1/6' />
+                        <div class='select-container w-full'>
+                            <select v-model='keg.capacity' class='select'>
+                                <option>Half-Barrel</option>
+                                <option>Sixtel</option>
+                            </select>
+                            <div class='select-arrow'></div>
+                        </div>
                     </div>
 
                     <div class='col col--4'>
                         <label>Status:</label>
-                        <input v-model='keg.status' class='input' placeholder='Circulating' />
+                        <div class='select-container w-full'>
+                            <select v-model='keg.status' class='select'>
+                                <option>Circulating</option>
+                                <option>Damaged</option>
+                                <option>Lost</option>
+                            </select>
+                            <div class='select-arrow'></div>
+                        </div>
                     </div>
 
                     <div class='col col--4'>
@@ -62,8 +80,9 @@ export default {
         return {
             keg: {
                 name: '',
-                capacity: '',
-                status: '',
+                manufacturer: '',
+                capacity: 'Half-Barrel',
+                status: 'Circulating',
                 product: ''
             }
         }

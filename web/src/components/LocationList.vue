@@ -47,7 +47,7 @@
 
                         <template v-for='loc in locations'>
                             <div @click='location = loc.id' class='grid col col--12 py6 bg-darken10-on-hover cursor-pointer'>
-                                <div class='col col--8' v-text='loc.name'></div>
+                                <div class='col col--8 pl6' v-text='loc.name'></div>
                                 <div class='col col--4' v-text='loc.kegs + " kegs"'></div>
                             </div>
                         </template>

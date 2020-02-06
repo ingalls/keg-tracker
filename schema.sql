@@ -27,7 +27,7 @@ INSERT INTO location (
     name
 ) VALUES (
     '00000000-0000-0000-0000-000000000000',
-    'Brewery'
+    'Winchester Ciderworks Downstairs'
 );
 
 CREATE TABLE product (
@@ -50,21 +50,24 @@ CREATE TABLE keg (
     id          UUID PRIMARY KEY,
 
     -- Current Status - Changes Audited --
-    name        TEXT UNIQUE NOT NULL,
-    location    UUID REFERENCES location(id),
-    status      TEXT NOT NULL,
-    product     UUID REFERENCES product(id),
+    name            TEXT UNIQUE NOT NULL,
+    location        UUID REFERENCES location(id),
+    movement        TIMESTAMP NOT NULL, -- Reset everytime the keg moves
+    status          TEXT NOT NULL,
+    product         UUID REFERENCES product(id),
 
     -- Current Status - Changes Not Audited --
-    created     TIMESTAMP,
-    capacity    TEXT
+    created         TIMESTAMP NOT NULL,
+    manufacturer    TEXT,
+    capacity        TEXT NOT NULL
 );
 
 CREATE TABLE keg_audit (
     id          UUID PRIMARY KEY,
     keg         UUID REFERENCES keg(id),
-    name        TEXT UNIQUE NOT NULL,
+    name        TEXT NULL,
     location    UUID REFERENCES location(id),
+    movement    TIMESTAMP NOT NULL,
     status      TEXT NOT NULL,
     product     UUID REFERENCES product(id)
 );
