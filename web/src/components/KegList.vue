@@ -47,7 +47,7 @@
                         <div class='grid'>
                             <div @click='order = "name"' class='cursor-pointer txt-underline-on-hover col col--4 border-b border--gray-light'>
                                 <svg class='icon fl mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-database'/></svg>
-                                Name 
+                                Name
                                 <template v-if='order === "name"'><svg class='icon fr mr6 color-gray' style='height: 25px;'><use xlink:href='#icon-chevron-down'/></svg></template>
                             </div>
                             <div @click='order = "stay"' class='cursor-pointer txt-underline-on-hover col col--2 border-b border--gray-light'>

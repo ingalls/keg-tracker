@@ -24,10 +24,10 @@
                 <Default/>
             </template>
             <template v-else-if='mode === "location"'>
-                <LocationList :location='location'/>
+                <LocationList :location='location' v-on:keg="keg = $event"/>
             </template>
             <template v-else-if='mode === "keg"'>
-                <KegList v-on:location='location = $event'/>
+                <KegList :keg='keg' v-on:location='location = $event'/>
             </template>
         </div>
     </div>
@@ -44,12 +44,16 @@ export default {
     data: function() {
         return {
             location: false,
+            leg: false,
             mode: 'default'
         }
     },
     watch: {
         location: function() {
             this.mode = 'location';
+        },
+        keg: function() {
+            this.mode = 'keg';
         }
     },
     components: {

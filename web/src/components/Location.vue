@@ -43,7 +43,7 @@
                     <template v-else-if='mode ==="kegs"'>
                         <div class='grid'>
                             <div class='col col--12 py12'>
-								<h2 class='txt-h4'>Kegs</h2>
+                                <h2 class='txt-h4'>Kegs</h2>
                             </div>
 
                             <div class='col col--6 border-b border--gray-light'>
@@ -61,12 +61,10 @@
                         </div>
 
                         <template v-for='k in kegs'>
-                            <div class='grid grid--gut12 col col--12 py6 bg-darken10-on-hover cursor-pointer'>
-                                <div @click='keg = k.id' class='col col--6 pl6'>
-                                    <span v-text='k.name'></span>
-                                </div>
-                                <div @click='keg = k.id'class='col col--3' v-text='k.stay + " days"'></div>
-                                <div @click='keg = k.id'class='col col--3' v-text='k.capacity'></div>
+                            <div @click='keg(k.id)' class='grid grid--gut12 col col--12 py6 bg-darken10-on-hover cursor-pointer'>
+                                <div class='col col--6 pl6' v-text='k-name'></div>
+                                <div class='col col--3' v-text='k.stay + " days"'></div>
+                                <div class='col col--3' v-text='k.capacity'></div>
                             </div>
                         </template>
                     </template>
@@ -120,6 +118,9 @@ export default {
             }).then((kegs) => {
                 this.kegs = kegs;
             });
+        },
+        keg: function(id) {
+            this.$emit('keg', id);
         },
         close: function() {
             this.$emit('close');
