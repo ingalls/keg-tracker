@@ -3,7 +3,7 @@
     "email": "nick@ingalls.ca",
     "server": {
         "session-secret": "I'm a session secret",
-        "port": 3000
+        "port": 3005
     },
     "database": {
         "ssl": true,

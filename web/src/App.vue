@@ -8,11 +8,14 @@
                         <svg class='icon h24 w24'><use xlink:href='#icon-home'/></svg>
                     </button>
 
-                    <button @click='mode = "location"' class='btn px6 round btn--stroke my6 w36 h36 color-black'>
+                    <button class='btn px6 round btn--stroke my6 w36 h36 color-black'>
                         <svg class='icon h24 w24'><use xlink:href='#icon-marker'/></svg>
                     </button>
-                    <button @click='mode = "keg"' class='btn px6 round btn--stroke my6 w36 h36 color-black'>
+                    <button class='btn px6 round btn--stroke my6 w36 h36 color-black'>
                         <svg class='icon h24 w24'><use xlink:href='#icon-database'/></svg>
+                    </button>
+                    <button class='btn px6 round btn--stroke my6 w36 h36 color-black'>
+                        <svg class='icon h24 w24'><use xlink:href='#icon-printer'/></svg>
                     </button>
                 </div>
                 <footer class='px12 py12 bg-gray-faint txt-s'>
@@ -20,46 +23,20 @@
             </div>
         </div>
         <div class='flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-ml'>
-            <template v-if='mode === "default"'>
-                <Default/>
-            </template>
-            <template v-else-if='mode === "location"'>
-                <LocationList :location='location' v-on:keg="keg = $event"/>
-            </template>
-            <template v-else-if='mode === "keg"'>
-                <KegList :keg='keg' v-on:location='location = $event'/>
-            </template>
+            <router-view/>
         </div>
     </div>
 </div>
 </template>
 
 <script>
-import LocationList from './components/LocationList.vue';
-import KegList from './components/KegList.vue';
-import Default from './components/Default.vue';
-
 export default {
     name: 'app',
     data: function() {
         return {
             location: false,
             leg: false,
-            mode: 'default'
         }
-    },
-    watch: {
-        location: function() {
-            this.mode = 'location';
-        },
-        keg: function() {
-            this.mode = 'keg';
-        }
-    },
-    components: {
-        LocationList,
-        KegList,
-        Default
     }
 }
 </script>
