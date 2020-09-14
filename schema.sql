@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS keg_audit;
 DROP TABLE IF EXISTS keg;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS location;
+DROP TABLE IF EXISTS laden;
 
 CREATE TABLE location (
     id          UUID PRIMARY KEY,
@@ -44,6 +45,16 @@ INSERT INTO product (
     '00000000-0000-0000-0000-000000000000',
     'none',
     'Empty'
+);
+
+CREATE TABLE laden (
+    id          BIGSERIAL,
+    name        TEXT,
+    address     TEXT,
+    city        TEXT,
+    state       TEXT,
+    postcode    TEXT,
+    pallets     JSONB
 );
 
 CREATE TABLE keg (
