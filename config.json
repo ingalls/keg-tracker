@@ -5,6 +5,13 @@
         "session-secret": "I'm a session secret",
         "port": 3005
     },
+    "contact": {
+        "name": "Winchester Ciderworks",
+        "addr": "2504 North Frederick Pike",
+        "city": "Winchester",
+        "region": "VA",
+        "postcode": "22603"
+    },
     "database": {
         "ssl": true,
         "password": "obviously-not-real" ,
